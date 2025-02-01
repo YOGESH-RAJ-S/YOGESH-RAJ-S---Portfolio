@@ -2,29 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* globals.css or tailwind config */
+/* Background Colors */
 .bg-light {
-    background-color: #ffffff;  /* Light background color */
-  }
-  
-  .bg-dark {
-    background-color: #1b1b1b;  /* Dark background color */
-  }
-  
-/* globals.css */
+    background-color: #ffffff;  /* Light background */
+}
 
-/* Light Theme Scrollbar */
+.bg-dark {
+    background-color: #1b1b1b;  /* Dark background */
+}
+
+/* Scrollbar Styling */
 html[data-theme="light"] {
-    --scrollbar-thumb-color: #B63E96 !important; /* Thumb color */
-    --scrollbar-track-color: #f5f5f5 !important; /* Track color */
+    --scrollbar-thumb-color: #B63E96 !important; /* Light mode scrollbar */
+    --scrollbar-track-color: #f5f5f5 !important;
 }
 
-/* Dark Theme Scrollbar */
 html[data-theme="dark"] {
-    --scrollbar-thumb-color: #58E6D9 !important; /* Thumb color */
-    --scrollbar-track-color: #1b1b1b !important; /* Track color */
+    --scrollbar-thumb-color: #58E6D9 !important; /* Dark mode scrollbar */
+    --scrollbar-track-color: #1b1b1b !important;
 }
 
+/* Apply Scrollbar Styles */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
