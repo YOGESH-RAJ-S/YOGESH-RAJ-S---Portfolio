@@ -1,24 +1,52 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const useThemeSwitcher = () => {
-  const [theme, setTheme] = useState('light');
+  const preferDarkQuery = "(prefers-color-scheme: dark)";
+  const [mode, setMode] = useState("");
 
   useEffect(() => {
-    // Check the user's theme preference from localStorage or set to 'light' by default
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-  }, []);
+    const mediaQuery = window.matchMedia(preferDarkQuery);
+    const userPref = window.localStorage.getItem("theme");
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme); // Save to localStorage
-  };
+    const handleChange = () => {
+      if (userPref) {
+        let check = userPref === "dark" ? "dark" : "light";
+        setMode(check);
+        if (check === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else {
+        let check = mediaQuery.matches ? "dark" : "light";
+        setMode(check);
+        if (check === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+    }
 
-  return {
-    theme,
-    toggleTheme,
-  };
-};
+    handleChange();
 
-export default useThemeSwitcher;
+    mediaQuery.addEventListener("change", handleChange)
+    return () => mediaQuery.removeEventListener("change", handleChange)
+  }, [])
+
+  useEffect(() => {
+    if (mode === "dark") {
+      window.localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add("dark")
+    } 
+    
+    if (mode === "light") {
+      window.localStorage.setItem("theme", "light");
+      document.documentElement.classList.remove("dark")
+    }
+  }, [mode])
+
+  return [mode, setMode]
+}
+
+export default useThemeSwitcher
