@@ -1,57 +1,168 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-
-const Skill = ({ name, x, y }) => {
-  return (
-    <>
-      <motion.div
-        className="flex items-center justify-center rounded-full font-semibold bg-dark text-light 
-        py-3 px-6 shadow-dark cursor-pointer absolute dark:text-dark dark:bg-light
-        lg:py-2 lg:px-4 md:text-sm md:py-1.5 md:px-3 xs:bg-transparent xs:dark:bg-transparent
-        xs:text-dark xs:dark:text-light xs:font-bold"
-        whileHover={{ scale: 1.05 }}
-        initial={{ x: 0, y: 0 }}
-        whileInView={{ x: x, y: y, transition: {duration: 1.5} }}
-        viewport={{once: true}}
-      >
-        {name}
-      </motion.div>
-    </>
-  );
-};
+import React, { useState, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
+import AnimatedText from '@/components/AnimatedText';
+import { 
+  PythonIcon, HtmlIcon, CssIcon, JavascriptIcon, ReactjsIcon, NextjsIcon, MongodbIcon, 
+  MysqlIcon, TailwindCSSIcon, BootstrapIcon, FigmaIcon, MiroIcon
+} from './Icons';
 
 const Skills = () => {
+  // Define progress values
+  const htmlProgress = 80; 
+  const cssProgress = 75; 
+  const JavaScriptProgress = 90;
+  const ReactProgress = 85;
+  const NextProgress = 90;
+  const MongoProgress=80;
+  const MysqlProgress=85;
+  const TailwindProgress=90;
+  const BootstrapProgress=85;
+  const FigmaProgress=80;
+  const MiroProgress=85;
+
+  const [htmlWidth, setHtmlWidth] = useState(0);
+  const [cssWidth, setCssWidth] = useState(0);
+  const [JavaScriptWidth, setJavaScriptWidth] = useState(0);
+  const [ReactScriptWidth, setReactScriptWidth] = useState(0);
+  const [NextScriptWidth, setNextScriptWidth] = useState(0);
+  const [MongoScriptWidth, setMongoScriptWidth] = useState(0);
+  const [MysqlScriptWidth, setMysqlScriptWidth] = useState(0);
+  const [TailwindScriptWidth, setTailwindScriptWidth] = useState(0);
+  const [BootstrapScriptWidth, setBootstrapScriptWidth] = useState(0);
+  const [FigmaScriptWidth, setFigmaScriptWidth] = useState(0);
+  const [MiroScriptWidth, setMiroScriptWidth] = useState(0);
+
+  // Create separate refs for each section to trigger scroll-based animations
+  const frontendRef = React.useRef(null);
+  const backendRef = React.useRef(null);
+  const frameworkRef = React.useRef(null);
+  const uiuxRef = React.useRef(null);
+
+  const isFrontendInView = useInView(frontendRef, { once: true });
+  const isBackendInView = useInView(backendRef, { once: true });
+  const isFrameworkInView = useInView(frameworkRef, { once: true });
+  const isUiuxInView = useInView(uiuxRef, { once: true });
+
+  // Trigger the animation when each section is in view
+  useEffect(() => {
+    if (isFrontendInView) {
+      setHtmlWidth(htmlProgress);
+      setCssWidth(cssProgress);
+      setJavaScriptWidth(JavaScriptProgress);
+      setReactScriptWidth(ReactProgress);
+      setNextScriptWidth(NextProgress);
+    }
+    if (isBackendInView) {
+      setMongoScriptWidth(MongoProgress);
+      setMysqlScriptWidth(MysqlProgress);
+    }
+    if (isFrameworkInView) {
+      setTailwindScriptWidth(TailwindProgress);
+      setBootstrapScriptWidth(BootstrapProgress);
+    }
+    if (isUiuxInView) {
+      setFigmaScriptWidth(FigmaProgress);
+      setMiroScriptWidth(MiroProgress);
+    }
+  }, [
+    isFrontendInView, isBackendInView, isFrameworkInView, isUiuxInView,
+    htmlProgress, cssProgress, JavaScriptProgress, ReactProgress, NextProgress, 
+    MongoProgress, MysqlProgress, TailwindProgress, BootstrapProgress, FigmaProgress, MiroProgress
+  ]);
+
   return (
     <>
-      <h2 className="font-bold text-8xl mt-64 w-full text-center md:text-6xl md:mt-32">Skills</h2>
-      <div className="w-full h-screen relative flex items-center justify-center rounded-full bg-circularLight dark:bg-circularDark
-      lg:h-[80vh] sm:h-[60vh] xs:h-[50vh] 
-      lg:bg-circularLightLg lg:dark:bg-circularDarkLg 
-      md:bg-circularLightMd md:dark:bg-circularDarkMd 
-      sm:bg-circularLightSm sm:dark:bg-circularDarkSm 
-      ">
-        <motion.div
-          className="flex items-center justify-center rounded-full font-semibold bg-dark text-light p-8 shadow-dark cursor-pointer
-          dark:text-dark dark:bg-light lg:p-6 md:p-4 xs:text-xs xs:p-2"
-          whileHover={{ scale: 1.05 }}
-        >
-          Web
-        </motion.div>
+      <AnimatedText text="SKILLS " className='mb-10 mt-50 lg:!text-7xl sm:!text-6xl xs:!text-4xl sm:mb-8 pt-20'/>
+      
+      {/* Frontend Skills Section */}
+      <section ref={frontendRef} className="flex flex-wrap justify-center w-full mt-2">
+        <div className="w-full sm:max-w-xs md:max-w-md lg:max-w-lg p-6 m-4 bg-light dark:bg-dark border-2 border-dark dark:border-light rounded-2xl">
+          <h1 className="text-4xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 underline-offset-4 decoration-4">
+            FRONTEND SKILLS
+          </h1>
+          <div className="space-y-6">
+            {/* HTML, CSS, JS, React, NextJS Progress Bar Components */}
+            <SkillProgressBar icon={<HtmlIcon />} label="HTML" progress={htmlWidth} />
+            <SkillProgressBar icon={<CssIcon />} label="CSS" progress={cssWidth} />
+            <SkillProgressBar icon={<JavascriptIcon />} label="JAVASCRIPT" progress={JavaScriptWidth} />
+            <SkillProgressBar icon={<ReactjsIcon />} label="REACT.JS" progress={ReactScriptWidth} />
+            <SkillProgressBar icon={<NextjsIcon />} label="NEXT.JS" progress={NextScriptWidth} />
+          </div>
+        </div>
+      </section>
+      
+      {/* Backend Skills Section */}
+      <section ref={backendRef} className="flex flex-wrap justify-center w-full mt-2">
+        <div className="w-full sm:max-w-xs md:max-w-md lg:max-w-lg p-6 m-4 bg-light dark:bg-dark border-2 border-dark dark:border-light rounded-2xl">
+          <h1 className="text-4xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 underline-offset-4 decoration-4">
+            BACKEND SKILLS
+          </h1>
+          <div className="space-y-6">
+            {/* MongoDB, MySQL Progress Bar Components */}
+            <SkillProgressBar icon={<MongodbIcon />} label="MONGO DB" progress={MongoScriptWidth} />
+            <SkillProgressBar icon={<MysqlIcon />} label="MYSQL" progress={MysqlScriptWidth} />
+          </div>
+        </div>
+      </section>
 
-        <Skill name="HTML" x="-18vw" y="2vw" />
-        <Skill name="CSS" x="-5vw" y="-7vw" />
-        <Skill name="JavaScript" x="16vw" y="6vw" />
-        <Skill name="ReactJS" x="0vw" y="7vw" />
-        <Skill name="NextJS" x="-20vw" y="-15vw" />
-        <Skill name="GatsbyJS" x="15vw" y="-12vw" />
-        <Skill name="Web Design" x="32vw" y="-5vw" />
-        <Skill name="Figma" x="0vw" y="-22vw" />
-        <Skill name="Firebase" x="-32vw" y="0vw" />
-        <Skill name="Tailwind CSS" x="-18vw" y="15vw" />
-        <Skill name="Mongodb" x="18vw" y="18vw" />
-      </div>
+      {/* Framework Skills Section */}
+      <section ref={frameworkRef} className="flex flex-wrap justify-center w-full mt-2">
+        <div className="w-full sm:max-w-xs md:max-w-md lg:max-w-lg p-6 m-4 bg-light dark:bg-dark border-2 border-dark dark:border-light rounded-2xl">
+          <h1 className="text-4xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 underline-offset-4 decoration-4">
+            FRAMEWORK SKILLS
+          </h1>
+          <div className="space-y-6">
+            {/* TailwindCSS, Bootstrap Progress Bar Components */}
+            <SkillProgressBar icon={<TailwindCSSIcon />} label="TAILWINDCSS" progress={TailwindScriptWidth} />
+            <SkillProgressBar icon={<BootstrapIcon />} label="BOOTSTRAP" progress={BootstrapScriptWidth} />
+          </div>
+        </div>
+      </section>
+
+      {/* UI/UX Skills Section */}
+      <section ref={uiuxRef} className="flex flex-wrap justify-center w-full mt-2">
+        <div className="w-full sm:max-w-xs md:max-w-md lg:max-w-lg p-6 m-4 bg-light dark:bg-dark border-2 border-dark dark:border-light rounded-2xl">
+          <h1 className="text-4xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 underline-offset-4 decoration-4">
+            UI/UX DESIGN SKILLS
+          </h1>
+          <div className="space-y-6">
+            {/* Figma, Miro Progress Bar Components */}
+            <SkillProgressBar icon={<FigmaIcon />} label="FIGMA" progress={FigmaScriptWidth} />
+            <SkillProgressBar icon={<MiroIcon />} label="MIRO" progress={MiroScriptWidth} />
+          </div>
+        </div>
+      </section>
     </>
   );
 };
+
+// Progress Bar Component
+const SkillProgressBar = ({ icon, label, progress }) => (
+  <div className="flex items-center space-x-4">
+    <motion.a
+      href="https://x.com/YOGESH_RAJ_S"
+      target={"_blank"}
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.9 }}
+      className="w-6 mx-1 text-2xl sm:text-3xl"
+    >
+      {icon}
+    </motion.a>
+    <div className="w-full">
+      <div className="flex justify-between font-bold">
+        <span>{label}</span>
+        <span className="text-sm text-dark dark:text-light">{progress}%</span>
+      </div>
+      <div className="relative h-2 rounded bg-light border border-black dark:border-light mt-1 overflow-hidden">
+        <motion.div
+          className="absolute h-2 rounded bg-primary dark:bg-primaryDark"
+          initial={{ width: 0 }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 2.5, ease: 'easeInOut' }}
+        ></motion.div>
+      </div>
+    </div>
+  </div>
+);
 
 export default Skills;
