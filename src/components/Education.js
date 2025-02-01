@@ -6,7 +6,7 @@ const Details = ({ type, time, place, info }) => {
  const ref=useRef(null);
 
   return (
-    <li ref={ref} className='my-8 first:mt-8 last:mb-0 w-[60%] mx-auto  flex flex-col items-center justify-between md:w-[80%]'>
+    <li ref={ref} className='my-8 first:mt-10 last:mb-0 w-[60%] mx-auto  flex flex-col items-center justify-between md:w-[80%]'>
         <LiIcon reference={ref}/>
       <motion.div
       initial={ {y:50}}
@@ -35,8 +35,8 @@ const Education = () => {
   });
 
   return (
-    <div className='my-64'>
-      <h2 className='font-bold text-8xl mb-32 w-full text-center md:text-6xl xs:text-4xl md:mb-16'>Education</h2>
+    <div className='mt-24 mb-44 sm:mb-44'>
+      <h2 className='font-bold text-8xl mb-32 w-full text-center md:text-6xl xs:text-4xl md:mb-16'>EDUCATION</h2>
       <div ref={ref} className='w-[75%] mx-auto relative lg:w-[90%] md:w-full'>
         <motion.div 
           style={{ scaleY: scrollYProgress }}
@@ -46,27 +46,21 @@ const Education = () => {
 
         <ul className='w-full flex flex-col items-start justify-between ml-4 xs:ml-2'>
           <Details
-            type=" Bachelor Of Computer Application"
+            type="Bachelor Of Computer Application"
             time="2018-2021"
             place="Bishop Heber College, Trichy"
             info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial Intelligence."
           />
           <Details
-            type=" Bachelor Of Computer Application"
-            time="2018-2021"
-            place="Bishop Heber College, Trichy"
+            type=" Diploma in Cooperative Management"
+            time="2021-2022"
+            place="Co-operative Union - Institute of Cooperative Management, Trichy"
             info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial Intelligence."
           />
           <Details
-            type=" Bachelor Of Computer Application"
-            time="2018-2021"
-            place="Bishop Heber College, Trichy"
-            info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial Intelligence."
-          />
-          <Details
-            type=" Bachelor Of Computer Application"
-            time="2018-2021"
-            place="Bishop Heber College, Trichy"
+            type="Master Of Computer Application"
+            time="2023-2025"
+            place="Meenakshi Ramaswamy Engineering College, Ariyalur"
             info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial Intelligence."
           />
         </ul>
