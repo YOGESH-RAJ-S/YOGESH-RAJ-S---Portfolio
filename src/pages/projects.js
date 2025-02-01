@@ -12,7 +12,9 @@ import project5 from "../../public/images/projects/mulcal.jpeg";
 import project6 from "../../public/images/projects/ana.jpeg";
 import project7 from "../../public/images/projects/pass.jpeg";
 import {motion} from "framer-motion";
+import useThemeSwitcher from '../components/hooks/useThemeSwitcher';
 import TransitionEffect from '@/components/TransitionEffect'
+
 
 const FramerImage = motion(Image);
 
