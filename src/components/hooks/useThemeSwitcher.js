@@ -1,34 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useThemeSwitcher = () => {
-  const preferDarkQuery = "(prefers-color-scheme: dark)";
-  const [mode, setMode] = useState("");
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(preferDarkQuery);
-    const userPref = window.localStorage.getItem("theme");
-
-    const handleChange = () => {
-      const newMode = userPref ? userPref : (mediaQuery.matches ? "dark" : "light");
-      setMode(newMode);
-      document.documentElement.classList.toggle("dark", newMode === "dark");
-      document.documentElement.setAttribute("data-theme", newMode); // ✅ Add this line
-    };
-
-    handleChange();
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    // Check the user's theme preference from localStorage or set to 'light' by default
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
   }, []);
 
-  useEffect(() => {
-    if (mode) {
-      window.localStorage.setItem("theme", mode);
-      document.documentElement.classList.toggle("dark", mode === "dark");
-      document.documentElement.setAttribute("data-theme", mode); // ✅ Ensure this is updated
-    }
-  }, [mode]);
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme); // Save to localStorage
+  };
 
-  return [mode, setMode];
+  return {
+    theme,
+    toggleTheme,
+  };
 };
 
 export default useThemeSwitcher;
