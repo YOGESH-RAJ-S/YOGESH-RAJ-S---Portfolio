@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useThemeSwitcher = () => {
   const preferDarkQuery = "(prefers-color-scheme: dark)";
@@ -9,44 +9,36 @@ const useThemeSwitcher = () => {
     const userPref = window.localStorage.getItem("theme");
 
     const handleChange = () => {
-      if (userPref) {
-        let check = userPref === "dark" ? "dark" : "light";
-        setMode(check);
-        if (check === "dark") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      } else {
-        let check = mediaQuery.matches ? "dark" : "light";
-        setMode(check);
-        if (check === "dark") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      }
-    }
+      const newMode = userPref ? userPref : (mediaQuery.matches ? "dark" : "light");
+      setMode(newMode);
+      document.documentElement.classList.toggle("dark", newMode === "dark");
+      updateThemeColorMeta(newMode);
+    };
 
     handleChange();
-
-    mediaQuery.addEventListener("change", handleChange)
-    return () => mediaQuery.removeEventListener("change", handleChange)
-  }, [])
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
-    if (mode === "dark") {
-      window.localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark")
-    } 
-    
-    if (mode === "light") {
-      window.localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark")
+    if (mode) {
+      window.localStorage.setItem("theme", mode);
+      document.documentElement.classList.toggle("dark", mode === "dark");
+      updateThemeColorMeta(mode);
     }
-  }, [mode])
+  }, [mode]);
 
-  return [mode, setMode]
-}
+  const updateThemeColorMeta = (theme) => {
+    let themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (!themeColorMeta) {
+      themeColorMeta = document.createElement('meta');
+      themeColorMeta.name = "theme-color";
+      document.head.appendChild(themeColorMeta);
+    }
+    themeColorMeta.setAttribute("content", theme === "dark" ? "#58E6D9" : "#B63E96");
+  };
 
-export default useThemeSwitcher
+  return [mode, setMode];
+};
+
+export default useThemeSwitcher;
