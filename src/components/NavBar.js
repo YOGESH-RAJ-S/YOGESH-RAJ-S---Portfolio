@@ -151,7 +151,8 @@ const NavBar = () => {
             </motion.a>
             <motion.a href="https://dribbble.com/YOGESH_RAJ_S" target={"_blank"} whileHover={{ y: -2 }} whileTap={{ scale: 0.9 }} className="w-6 ml-3 sm:mx-1">
               <DribbbleIcon />
-           <button
+            </motion.a>
+            <button
   onClick={() => {
     setMode(mode === "light" ? "dark" : "light");
     window.location.reload(); // Reload the page after changing the theme
