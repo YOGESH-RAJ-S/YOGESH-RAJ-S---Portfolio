@@ -28,7 +28,7 @@ const FeaturedProject = ({ type, title, summary, img, link, github }) => {
         '/>
       <Link href={link} target="_blank" 
         className="w-1/2 cursor-pointer overflow-hidden rounded-lg lg:w-full">
-        <FramerImage src={img} alt={title} className="w-full h-auto border border-black rounded-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[1.5rem]"
+        <FramerImage src={img} alt={title} className="w-full h-auto border border-black rounded-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[0.5rem]"
          whileHover={{scale:1.05}}
          transition={{duration:0.2}} 
          priority
@@ -69,7 +69,7 @@ const Project = ({ type, title, img, link, github, summary }) => {
         '/>
       <Link href={link} target="_blank" 
         className="w-full cursor-pointer overflow-hidden rounded-lg">
-        <FramerImage src={img} alt={title} className="w-full h-auto border border-black rounded-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[1.5rem]" 
+        <FramerImage src={img} alt={title} className="w-full h-auto border border-black rounded-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[0.5rem]" 
           whileHover={{scale:1.05}}
           transition={{duration:0.2}} 
           />
