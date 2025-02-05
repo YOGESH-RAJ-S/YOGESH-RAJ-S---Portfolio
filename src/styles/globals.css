@@ -2,42 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light & Dark Mode Background Colors */
 .bg-light {
-    @apply bg-white; /* Tailwind utility */
+  background-color: #ffffff;  /* Light background color */
 }
 
 .bg-dark {
-    @apply bg-[#1b1b1b]; /* Tailwind utility */
+  background-color: #1b1b1b;  /* Dark background color */
 }
 
-/* Theme-based Custom Properties */
-:root {
-    --scrollbar-thumb-color: #B63E96;
-    --scrollbar-track-color: #f5f5f5;
+/* Light Theme Scrollbar */
+html[data-theme="light"] {
+  --scrollbar-thumb-color: #B63E96 !important; /* Thumb color */
+  --scrollbar-track-color: #f5f5f5 !important; /* Track color */
 }
 
-[data-theme="dark"] {
-    --scrollbar-thumb-color: #58E6D9;
-    --scrollbar-track-color: #1b1b1b;
+/* Dark Theme Scrollbar */
+html[data-theme="dark"] {
+  --scrollbar-thumb-color: #58E6D9 !important; /* Thumb color */
+  --scrollbar-track-color: #1b1b1b !important; /* Track color */
 }
 
-/* Scrollbar Styling */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
 }
 
-/* Webkit (Chrome, Edge, Safari) Scrollbar */
 ::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb-color);
-    border-radius: 4px;
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--scrollbar-track-color);
+  background-color: var(--scrollbar-track-color);
 }
