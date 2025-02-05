@@ -1,17 +1,18 @@
-import Head from 'next/head'
-import { Montserrat } from 'next/font/google'
-import Layout from '@/components/Layout'
-import Image from 'next/image'
-import profilePic from "../../public/images/profile/yog1.png";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import profilePic from '../../public/images/profile/yog1.png';
+import Head from 'next/head';
+import { Montserrat } from 'next/font/google';
+import Layout from '@/components/Layout';
 import AnimatedText from '@/components/AnimatedText';
 import Link from 'next/link';
 import { LinkArrow } from '@/components/Icons';
 import HireMe from '../components/HireMe';
-import lightBulb from "../../public/images/svgs/miscellaneous_icons_1.svg"
-import TransitionEffect from '@/components/TransitionEffect'
+import lightBulb from '../../public/images/svgs/miscellaneous_icons_1.svg';
+import TransitionEffect from '@/components/TransitionEffect';
 import TypingEffect from 'react-typing-effect';
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export default function Home() {
   return (
@@ -22,75 +23,87 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <TransitionEffect/>
+      <TransitionEffect />
       <main className='flex items-center text-dark w-full dark:text-light sm:items-start'>
         <Layout className='pt-0 md:pt-16 sm:pt-8'>
           <div className="flex items-center justify-between w-full lg:flex-col p-20 sm:p-3">
-            <div className='w-1/2 md:w-full pb-4'>
-            <Image 
-  src={profilePic} 
-  alt="yogi" 
-  className='w-full h-auto max-w-md mx-auto lg:max-w-full md:max-w-sm sm:max-w-xs 
-  rounded-full border-8 border-primary dark:border-primaryDark shadow-lg'
-  priority
-  sizes="(max-width: 768px) 100vw,
-  (max-width: 1200px) 50vw,
-  50vw"
+            {/* Responsive Animated Circle and Image */}
+            <div className='w-1/2 md:w-full pb-4 relative flex justify-center items-center'>
+              <svg 
+                viewBox="0 0 506 506" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="absolute w-[495px] md:w-[450px] sm:w-[325px]"
+              >
+              <motion.circle
+  cx="50%"
+  cy="50%"
+  r="49%"
+  stroke="currentColor"
+  className="stroke-[#B63E96] dark:stroke-[#58E6D9]"
+  strokeWidth="7"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  initial={{ strokeDasharray: '24 10 0 0', rotate: 0 }}
+  animate={{
+    strokeDasharray: [ '16 25 92 72', ],
+    rotate: 360,
+  }}
+  transition={{
+    duration: 15,
+    repeat: Infinity,
+    ease: "linear",
+  }}
 />
 
+
+              </svg>
+              <Image 
+                src={profilePic} 
+                alt="yogi" 
+                className="w-full h-auto max-w-md mx-auto lg:max-w-full md:max-w-sm sm:max-w-xs rounded-full border-8 border-dark dark:border-light shadow-lg"
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+              />
             </div>
-            <div className='w-1/2 flex flex-col items-center self-center lg:w-full lg:text-center '>
-              <AnimatedText text="YOGESH RAJ" className='!text-6xl !text-left  
-              xl:!text-5xl lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl
-              '/>
-
-              {/* Typing Animation Effect */}
-           
-<h2 className='pt-3 text-base font-medium md:text-sm sm:text-xs'>
-  Hi, I am  <span className='text-primary dark:text-primaryDark'>
-    <TypingEffect 
-      text={["Full-stack Developer", "UI/UX Designer"]}
-      speed={200}
-      eraseSpeed={50}
-      eraseDelay={1000}
-      typingDelay={500}
-    />
-  </span>
-</h2>
-
-
-
+            
+            {/* Text Content */}
+            <div className='w-1/2 flex flex-col items-center self-center lg:w-full lg:text-center md:pt-5 sm:pt-4'>
+              <AnimatedText text="YOGESH RAJ" className='!text-6xl !text-left xl:!text-5xl lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl' />
+              <h2 className='pt-3 text-base font-medium md:text-sm sm:text-xs '>
+                Hi, I am <span className='text-primary dark:text-primaryDark'>
+                  <TypingEffect 
+                    text={["Full-Stack Developer", "UI/UX Designer"]}
+                    speed={200}
+                    eraseSpeed={50}
+                    eraseDelay={1000}
+                    typingDelay={500}
+                  />
+                </span>
+              </h2>
               <p className='my-4 text-base font-medium md:text-sm sm:text-xs'>
                 As a skilled full-stack developer, I am dedicated to turning ideas into innovative web applications. 
                 Explore my latest projects and articles, showcasing my expertise in React.js and web development.
               </p>
               <div className='flex items-center self-start mt-2 lg:self-center'>
-                <Link href="/Yogesh Raj.pdf" target={"_blank"}
-                  className="flex items-center bg-dark text-light p-2.5 px-6
-                  rounded-lg text-lg font-semibold hover:bg-light hover:text-dark border-2
-                  border-solid border-transparent hover:border-dark 
-                  dark:bg-light dark:text-dark hover:dark:bg-dark hover:dark:text-light
-                  hover:dark:border-light md:p-2 md:px-4 md:text-base m-2"
-                  download={true}
-                >
-                  Resume<LinkArrow className={"w-6 ml-1"}/>
+                <Link href="/Yogesh Raj.pdf" target="_blank"
+                  className="flex items-center bg-dark text-light p-2.5 px-6 rounded-lg text-lg font-semibold hover:bg-light hover:text-dark border-2 border-solid border-transparent hover:border-dark dark:bg-light dark:text-dark hover:dark:bg-dark hover:dark:text-light hover:dark:border-light md:p-2 md:px-4 md:text-base m-2"
+                  download>
+                  Resume<LinkArrow className="w-6 ml-1" />
                 </Link>
-                <Link href="mailto:yogeshraj1470@gmail.com" target={"_blank"}
-                  className="flex items-center ml-4 bg-dark text-light p-2.5 px-6 
-                  rounded-lg text-lg font-semibold hover:bg-primary dark:bg-light dark:text-dark  dark:hover:bg-primaryDark
-                  sm:px-4 sm:text-base md:p-2 md:px-4 md:text-base m-2 border-2  border-solid border-transparent"
-                >
+                <Link href="mailto:yogeshraj1470@gmail.com" target="_blank"
+                  className="flex items-center ml-4 bg-dark text-light p-2.5 px-6 rounded-lg text-lg font-semibold hover:bg-primary dark:bg-light dark:text-dark dark:hover:bg-primaryDark sm:px-4 sm:text-base md:p-2 md:px-4 md:text-base m-2 border-2 border-solid border-transparent">
                   Contact
                 </Link>
               </div>
             </div>
           </div>
         </Layout>
-        <HireMe/>
+        <HireMe />
         <div className='absolute right-8 bottom-8 inline-block w-24 md:hidden'>
-          <Image src={lightBulb} alt="Yogesh Raj" className='w-full h-auto'/>
+          <Image src={lightBulb} alt="Yogesh Raj" className='w-full h-auto' />
         </div>
       </main>
     </>
-  )
+  );
 }
