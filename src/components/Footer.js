@@ -16,13 +16,13 @@ const Footer = () => {
             &#9825;
           </span> 
           by&nbsp;
-          <a href="https://www.behance.net/yogeshraj8" 
+          <a href="https://wa.me/916369651071" 
              className='underline underline-offset-2' 
              target="_blank" rel="noopener noreferrer">
             Yogesh Raj
           </a>  
         </div>
-        <a href="https://www.behance.net/yogeshraj8" 
+        <a href="https://wa.me/916369651071"   
            className='underline underline-offset-2' 
            target="_blank" rel="noopener noreferrer">
            Say Hello
