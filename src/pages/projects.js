@@ -77,7 +77,7 @@ const Project = ({ type, title, img, link, github, summary }) => {
       <div className="w-full flex flex-col items-start justify-between mt-4">
         <span className="text-primary font-medium text-xl dark:text-primaryDark lg:text-lg md:text-base ">{type}</span>
         <Link href={link} target="_blank" className="hover:underline underline-offset-2">
-          <h2 className="my-2 w-full text-left text-3xl font-bold lg:text-2xl">{title}</h2>
+          <h2 className="my-2 w-full text-left text-4xl font-bold dark:text-light sm:text-sm">{title}</h2>
         </Link>
      <p className="my-2 font-medium text-dark dark:text-light sm:text-sm">{summary}</p>
         <div className="w-full mt-2 flex items-center justify-between">
