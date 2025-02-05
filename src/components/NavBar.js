@@ -108,11 +108,15 @@ const NavBar = () => {
             <DribbbleIcon />
           </motion.a>
           <button
-            onClick={() => setMode(mode === "light" ? "dark" : "light")}
-            className={`w-6 ml-3 flex items-center justify-center rounded-full p-1 ${mode === "light" ? "bg-dark text-light" : "bg-light text-dark"}`}
-          >
-            {mode === "dark" ? <SunIcon className={"fill-dark"} /> : <MoonIcon className={"fill-dark"} />}
-          </button>
+  onClick={() => {
+    setMode(mode === "light" ? "dark" : "light");
+    window.location.reload(); // Reload the page after changing the theme
+  }}
+  className={`w-6 ml-3 flex items-center justify-center rounded-full p-1 ${mode === "light" ? "bg-dark text-light" : "bg-light text-dark"}`}
+>
+  {mode === "dark" ? <SunIcon className={"fill-dark"} /> : <MoonIcon className={"fill-dark"} />}
+</button>
+
         </nav>
       </div>
 
@@ -147,13 +151,16 @@ const NavBar = () => {
             </motion.a>
             <motion.a href="https://dribbble.com/YOGESH_RAJ_S" target={"_blank"} whileHover={{ y: -2 }} whileTap={{ scale: 0.9 }} className="w-6 ml-3 sm:mx-1">
               <DribbbleIcon />
-            </motion.a>
-            <button
-              onClick={() => setMode(mode === "light" ? "dark" : "light")}
-              className={`w-6 ml-3 flex items-center justify-center rounded-full p-1 ${mode === "light" ? "bg-dark text-light" : "bg-light text-dark"}`}
-            >
-              {mode === "dark" ? <SunIcon className={"fill-dark"} /> : <MoonIcon className={"fill-dark"} />}
-            </button>
+           <button
+  onClick={() => {
+    setMode(mode === "light" ? "dark" : "light");
+    window.location.reload(); // Reload the page after changing the theme
+  }}
+  className={`w-6 ml-3 flex items-center justify-center rounded-full p-1 ${mode === "light" ? "bg-dark text-light" : "bg-light text-dark"}`}
+>
+  {mode === "dark" ? <SunIcon className={"fill-dark"} /> : <MoonIcon className={"fill-dark"} />}
+</button>
+
           </nav>
 
           {/* Close button */}
