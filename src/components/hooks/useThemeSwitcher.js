@@ -26,27 +26,29 @@ const useThemeSwitcher = () => {
           document.documentElement.classList.remove("dark");
         }
       }
-    }
+    };
 
     handleChange();
 
-    mediaQuery.addEventListener("change", handleChange)
-    return () => mediaQuery.removeEventListener("change", handleChange)
-  }, [])
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     if (mode === "dark") {
       window.localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark")
-    } 
-    
+      document.documentElement.classList.add("dark");
+      window.location.reload(); // Reload page after theme change
+    }
+
     if (mode === "light") {
       window.localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark")
+      document.documentElement.classList.remove("dark");
+      window.location.reload(); // Reload page after theme change
     }
-  }, [mode])
+  }, [mode]);
 
-  return [mode, setMode]
-}
+  return [mode, setMode];
+};
 
-export default useThemeSwitcher
+export default useThemeSwitcher;
