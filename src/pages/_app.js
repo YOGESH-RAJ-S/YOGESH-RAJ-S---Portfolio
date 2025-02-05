@@ -1,51 +1,55 @@
-import '@/styles/globals.css';
-import { Montserrat } from 'next/font/google';
-import Head from 'next/head';
-import NavBar from '../components/NavBar';
+import '@/styles/globals.css'
+import { Montserrat } from "next/font/google"
+import Head from "next/head";
+import NavBar from '../components/NavBar'; 
 import Footer from '@/components/Footer';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-mont',
-});
+  subsets: ["latin"],
+  variable: "--font-mont"
+})
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [theme, setTheme] = useState('light'); // Default theme
+  const [theme, setTheme] = useState("light"); // Default light mode
 
   useEffect(() => {
-    if (typeof window === 'undefined') return; // Prevent SSR issues
-
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-  }, []);
-
-  useEffect(() => {
-    if (typeof document === 'undefined') return; // Ensure document exists
-
     const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-    if (!themeColorMeta) return; // Prevent errors if meta tag is missing
 
-    if (theme === 'dark') {
+    // Check if user has a saved theme preference in localStorage
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+
+    // Apply the saved theme
+    if (savedTheme === "dark") {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
-      themeColorMeta.setAttribute('content', '#58E6D9');
+      themeColorMeta.setAttribute('content', '#58E6D9'); // Dark mode color
     } else {
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
-      themeColorMeta.setAttribute('content', '#B63E96');
+      themeColorMeta.setAttribute('content', '#B63E96'); // Light mode color
     }
-  }, [theme]);
+  }, []);
 
-  // Function to toggle theme and update localStorage
+  // Function to toggle theme and update theme color dynamically
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (newTheme === "dark") {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      themeColorMeta.setAttribute('content', '#58E6D9'); // Dark mode color
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+      themeColorMeta.setAttribute('content', '#B63E96'); // Light mode color
     }
   };
 
@@ -54,7 +58,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
-        <meta name="theme-color" content={theme === 'dark' ? '#58E6D9' : '#B63E96'} />
+        <meta name="theme-color" content={theme === "dark" ? "#58E6D9" : "#B63E96"} id="theme-color-meta" />
       </Head>
       <main className={`${montserrat.variable} font-mont bg-light dark:bg-dark w-full min-h-screen`}>
         <NavBar toggleTheme={toggleTheme} theme={theme} />
@@ -64,5 +68,5 @@ export default function App({ Component, pageProps }) {
         <Footer />
       </main>
     </>
-  );
+  )
 }
